@@ -15,7 +15,19 @@ function updateClocks(){
 }
 updateClocks();setInterval(updateClocks,1000);
 const menu=document.querySelector('.mobile-menu');
-document.querySelector('.hamburger')?.addEventListener('click',()=>menu.classList.add('open'));
-document.querySelector('.mobile-close')?.addEventListener('click',()=>menu.classList.remove('open'));
+const hamburger=document.querySelector('.hamburger');
+const closeButton=document.querySelector('.mobile-close');
+function setMenu(open){
+ if(!menu) return;
+ menu.classList.toggle('open',open);
+ menu.setAttribute('aria-hidden',String(!open));
+ hamburger?.setAttribute('aria-expanded',String(open));
+ document.body.classList.toggle('menu-open',open);
+}
+hamburger?.setAttribute('aria-expanded','false');
+hamburger?.addEventListener('click',()=>setMenu(true));
+closeButton?.addEventListener('click',()=>setMenu(false));
+menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setMenu(false)));
+window.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 const imgs=[...document.querySelectorAll('.service-media img')];
 document.querySelectorAll('.service-list li').forEach(li=>li.addEventListener('mouseenter',()=>{imgs.forEach((img,i)=>img.classList.toggle('active',i===Number(li.dataset.img))) }));
