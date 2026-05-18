@@ -5,8 +5,8 @@
 @font-face{font-family:Cotford;src:url("https://cdn.prod.website-files.com/63af5395359373757534d22a/63af541885d8d8ce061d8af4_Cotford%20Text%20Light%20Italic.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
 :root{--black:#020202;--white:#f1f1f1;--muted:rgba(241,241,241,.45)}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--black)}
-body{margin:0;background:var(--black);color:var(--white);font-family:"Neue Haas Display",Arial,sans-serif;font-size:1vw;line-height:1;overflow-x:hidden}
+html{scroll-behavior:smooth;background:var(--black);overflow-x:clip}
+body{margin:0;background:var(--black);color:var(--white);font-family:"Neue Haas Display",Arial,sans-serif;font-size:1vw;line-height:1;overflow-x:clip}
 ::-webkit-scrollbar{width:0;height:0}
 a{color:inherit;text-decoration:none}
 .cursor{position:fixed;inset:auto auto 0 0;z-index:9999;width:18px;height:18px;border:1px solid #fff;border-radius:50%;mix-blend-mode:difference;pointer-events:none;transform:translate(-50%,-50%);opacity:0;transition:opacity .2s}
@@ -26,7 +26,9 @@ body:hover .cursor{opacity:1}
 .clock-row em{font-style:normal;font-size:.9em;margin-right:6px}
 .clock-row span{font-size:1em}
 .clock-row [data-clock]{font-size:1em}
-.nav{display:flex;gap:0;margin-left:15%;font-size:.9em}
+.blink{animation:blink 1s steps(1,end) infinite}
+@keyframes blink{50%{opacity:0}}
+.nav{display:flex;gap:.28em;margin-left:15%;font-size:.9em}
 .nav a,.contact-link{position:relative;display:inline-flex;align-items:center}
 .nav a::after,.contact-link::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right center;transition:transform .5s}
 .nav a:hover::after,.contact-link:hover::after{transform:scaleX(1);transform-origin:left center}
@@ -36,7 +38,7 @@ body:hover .cursor{opacity:1}
 .hamburger i{display:block;width:42px;height:2px;background:var(--white)}
 .hamburger i+i{margin-top:3px}
 .mobile-menu{display:none}
-.hero{position:relative;width:100vw;height:100vh;overflow:hidden}
+.hero{position:relative;width:100%;height:100vh;overflow:hidden}
 .hero picture,.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.3)}
 .hero-inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding:62px 32px 42px}
@@ -105,6 +107,7 @@ body:hover .cursor{opacity:1}
  .brand{width:51%;font-size:8em}
  .header-right{display:none}
  .hamburger{display:block}
+ body.menu-open{overflow:hidden}
  .mobile-menu{position:fixed;inset:0;z-index:30;background:#e6e6e6;color:#020202}
  .mobile-menu.open{display:block}
  .mobile-inner{height:100%;display:flex;flex-direction:column;padding:20px 16px 12px}
@@ -123,7 +126,7 @@ body:hover .cursor{opacity:1}
  .mobile-nav span{font-size:7em;line-height:1}
  .mobile-nav a.active span{color:#6f6f6f}
  .hero-inner{padding:35em 16px 24em}
- .hero h1{width:100%;font-size:3.8em}
+ .hero h1{width:100%;margin-left:0;font-size:3.8em}
  .manifesto{height:auto;min-height:291em;margin-bottom:0;padding-bottom:112px}
  .manifesto-bg,.manifesto-bg picture,.manifesto-bg img,.manifesto-gradient{height:291em}
  .manifesto-inner{padding:42px 16px 0}
@@ -138,16 +141,16 @@ body:hover .cursor{opacity:1}
  .manifesto-item p{font-size:3.4em;line-height:1.18;max-width:18ch}
  .section-pad{padding:112px 16px}.about{padding-left:16px;height:auto}.about .eyebrow{margin-bottom:32px}.about .button{margin-top:24px}.services{padding-top:112px}.services .eyebrow{margin-bottom:32px}.about h2{max-width:none}.projects,.services{height:auto}
  .eyebrow{margin-bottom:32px;font-size:3em}
- .about{min-height:1359.421875px}.about h2{font-size:7.6em}
+ .about{min-height:0;padding-bottom:168px}.about h2{font-size:7.6em}
  .button{margin-top:24px;font-size:2.4em}
- .projects{height:1607.828125px}.projects-head{display:block;margin-top:0}
+ .projects{height:auto;padding-bottom:112px}.projects-head{display:block;margin-top:0}
  .projects-head h2{font-size:17em}
  .projects-head .button{margin-left:0}
  .project-grid{display:block;margin-top:48px}
  .project-card{display:block;width:100%;margin-bottom:32px}
  .project-card h3{font-size:5em}
  .project-card div{font-size:2.6em}
- .services{height:1170.1953125px;padding-top:192px}.services .eyebrow{margin-bottom:154px}.services-grid{display:block}
+ .services{height:auto;padding-top:112px;padding-bottom:112px}.services .eyebrow{margin-bottom:32px}.services-grid{display:block}
  .service-list li{font-size:8em}
  .service-media{display:none}
  .cta-final{height:675px;margin-top:32px;padding:0 16px}
